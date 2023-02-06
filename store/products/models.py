@@ -6,7 +6,7 @@ class ProductCategory(models.Model):
     description = models.TextField(null=True, blank=True)
 
 
-class Products(models.Model):
+class Product(models.Model):
     name = models.CharField(max_length=256)
     description = models.TextField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
