@@ -13,4 +13,3 @@ class Products(models.Model):
     quantity = models.PositiveIntegerField(default=0)
     image = models.ImageField(upload_to='products_images')
     category = models.ForeignKey(to=ProductCategory, on_delete=models.CASCADE)
-
