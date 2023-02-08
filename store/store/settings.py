@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'products.apps.ProductsConfig',
-    'users',
+    'users.apps.UsersConfig',
 
 ]
 
