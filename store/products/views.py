@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from products.models import ProductCategory, Product
+from products.models import ProductCategory, Product, Basket
+from users import User
 
 
 def index(request):
@@ -16,3 +17,6 @@ def products(request):
                'categories': ProductCategory.objects.all(),
                }
     return render(request, 'products/products.html', context)
+
+def basket_ad(request, product_id):
+    pass
