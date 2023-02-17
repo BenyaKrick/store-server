@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
 from products.models import ProductCategory, Product, Basket
 from users.models import User
 
@@ -28,3 +28,5 @@ def basket_add(request, product_id):
         basket = baskets.first()
         basket.quantity += 1
         basket.save()
+
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
