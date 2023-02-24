@@ -15,11 +15,12 @@ def products(request):
         'title': 'Каталог',
         'products': Product.objects.all(),
         'categories': ProductCategory.objects.all(),
-        }
+    }
     return render(request, 'products/products.html', context)
 
 
 def basket_add(request, product_id):
+
     product = Product.objects.get(id=product_id)
     baskets = Basket.objects.filter(user=request.user, product=product)
 
@@ -30,4 +31,10 @@ def basket_add(request, product_id):
         basket.quantity += 1
         basket.save()
 
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
+def basket_remove(request, basket_id):
+    basket = Basket.objects.get(id=basket_id)
+    basket.delete()
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
