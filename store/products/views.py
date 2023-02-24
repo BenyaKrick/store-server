@@ -4,7 +4,7 @@ from users.models import User
 
 
 def index(request):
-    context = {'title': 'Test Title',
+    context = {'title': 'Пан-Терра групп',
                'is_promotion': True,
                }
     return render(request, 'products/index.html', context)
