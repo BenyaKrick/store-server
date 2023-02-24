@@ -20,7 +20,7 @@ def products(request):
 
 
 def basket_add(request, product_id):
-    product = Product.objects.get(to=product_id)
+    product = Product.objects.get(id=product_id)
     baskets = Basket.objects.filter(user=request.user, product=product)
 
     if not baskets.exists():

@@ -3,10 +3,18 @@ from django.db import models
 from users.models import User
 
 
-class ProductCategory(models.Model):
+class ProductCategoryNew(models.Model):
     name = models.CharField(max_length=128, unique=True)
     description = models.TextField(null=True, blank=True)
 
+    def __str__(self):
+        return self.name
+
+
+class ProductCategory(models.Model):
+    name = models.CharField(max_length=128, unique=True)
+    description = models.TextField(null=True, blank=True)
+    category = models.ForeignKey(to=ProductCategoryNew, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
 
