@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect
-from products.models import ProductCategory, Product, Basket
+from products.models import ProductCategory, Product, Basket, ProductCategoryNew
 from users.models import User
 
 
@@ -14,6 +14,7 @@ def products(request):
     context = {
         'title': 'Каталог',
         'products': Product.objects.all(),
+        'categoriesnew': ProductCategoryNew.objects.all(),
         'categories': ProductCategory.objects.all(),
         }
     return render(request, 'products/products.html', context)
