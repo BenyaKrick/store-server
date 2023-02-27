@@ -15,6 +15,7 @@ class IndexView(TemplateView):
         return context
 
 
+
 def products(request, category_id=None, page_number=1):
     products = Product.objects.filter(category_id=category_id) if category_id else Product.objects.all()
 
