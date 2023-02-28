@@ -1,10 +1,8 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from products.models import ProductCategory, Product, Basket
-from users.models import User
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
 
 
 class IndexView(TemplateView):
