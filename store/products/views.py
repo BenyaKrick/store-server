@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.views.generic import TemplateView
+from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
 from products.models import ProductCategory, Product, Basket
 from users.models import User
 from django.contrib.auth.decorators import login_required
@@ -15,20 +16,33 @@ class IndexView(TemplateView):
         return context
 
 
+class ProductsListView(ListView):
+    model = Product
+    template_name = 'products/products.html'
 
-def products(request, category_id=None, page_number=1):
-    products = Product.objects.filter(category_id=category_id) if category_id else Product.objects.all()
+    def get_context_data(self, object_list=None, **kwargs):
+        context = super(ProductsListView, self).get_context_data()
+        context['title'] = 'Каталог'
+        context['categories'] = ProductCategory.objects.all(),
+        return context
 
-    per_page = 2
-    paginator = Paginator(products, per_page)
-    products_paginator = paginator.page(page_number)
 
-    context = {
-        'title': 'Каталог',
-        'categories': ProductCategory.objects.all(),
-        'products': products_paginator,
-    }
-    return render(request, 'products/products.html', context)
+
+
+
+# def products(request, category_id=None, page_number=1):
+#     products = Product.objects.filter(category_id=category_id) if category_id else Product.objects.all()
+#
+#     per_page = 2
+#     paginator = Paginator(products, per_page)
+#     products_paginator = paginator.page(page_number)
+#
+#     context = {
+#         'title': 'Каталог',
+#         'categories': ProductCategory.objects.all(),
+#         'products': products_paginator,
+#     }
+#     return render(request, 'products/products.html', context)
 
 
 @login_required
