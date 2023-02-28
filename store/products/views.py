@@ -19,14 +19,13 @@ class IndexView(TemplateView):
 class ProductsListView(ListView):
     model = Product
     template_name = 'products/products.html'
-    title = 'Каталог'
+    # title = 'Каталог'
+
     def get_context_data(self, object_list=None, **kwargs):
         context = super(ProductsListView, self).get_context_data()
-        context['categories'] = ProductCategory.objects.all(),
+        context['title'] = 'Каталог'
+        context['categories'] = ProductCategory.objects.all()
         return context
-
-
-
 
 
 # def products(request, category_id=None, page_number=1):
