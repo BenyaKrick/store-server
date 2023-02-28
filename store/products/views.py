@@ -20,6 +20,7 @@ class ProductsListView(ListView):
     model = Product
     template_name = 'products/products.html'
     paginate_by = 3
+
     # title = 'Каталог'
 
     def get_queryset(self):
@@ -32,21 +33,6 @@ class ProductsListView(ListView):
         context['title'] = 'Каталог'
         context['categories'] = ProductCategory.objects.all()
         return context
-
-
-# def products(request, category_id=None, page_number=1):
-#     products = Product.objects.filter(category_id=category_id) if category_id else Product.objects.all()
-#
-#     per_page = 2
-#     paginator = Paginator(products, per_page)
-#     products_paginator = paginator.page(page_number)
-#
-#     context = {
-#         'title': 'Каталог',
-#         'categories': ProductCategory.objects.all(),
-#         'products': products_paginator,
-#     }
-#     return render(request, 'products/products.html', context)
 
 
 @login_required
