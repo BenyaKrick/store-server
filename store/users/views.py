@@ -41,6 +41,9 @@ class UserProfileView(UpdateView):
     form_class = UserProfileForm
     template_name = 'user/profile.html'
 
+    def get_success_url(self):
+        return reverse_lazy('user:profile', args=(self.objects.id,))
+
     def get_context_data(self, **kwargs):
         context = super(UserProfileView, self).get_context_data()
         context['title'] = 'Store - Личный кабинет'
