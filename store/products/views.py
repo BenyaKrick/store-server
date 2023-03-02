@@ -17,7 +17,7 @@ class IndexView(TemplateView):
 class ProductsListView(ListView):
     model = Product
     template_name = 'products/products.html'
-    paginate_by = 15
+    paginate_by = 3
 
     # title = 'Каталог'
 
