@@ -15,3 +15,13 @@ class EmailVerification(models.Model):
 
     def __str__(self):
         return f'EmailVerification object for {self.user.email}'
+
+    def send_verification_email(self):
+        send_mail(
+            'Subject here',
+            'Test message.',
+            'from@example.com',
+            [self.user.email],
+            fail_silently=False,
+        )
+
