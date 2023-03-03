@@ -1,9 +1,9 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.contrib import auth, messages
+from django.contrib import auth
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 from django.urls import reverse, reverse_lazy
 from products.models import Basket
-
+from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.edit import CreateView, UpdateView
 from users.models import User
 
@@ -24,11 +24,12 @@ def login(request):
     return render(request, 'users/login.html', context)
 
 
-class UserRegistrationView(CreateView):
+class UserRegistrationView(SuccessMessageMixin, CreateView):
     model = User
     form_class = UserRegistrationForm
     template_name = 'users/registration.html'
     success_url = reverse_lazy('users:login')
+    success_message = 'Вы успешно зарегистрированы'
 
     def get_context_data(self, **kwargs):
         context = super(UserRegistrationView, self).get_context_data()
@@ -49,27 +50,6 @@ class UserProfileView(UpdateView):
         context['title'] = 'Store - Личный кабинет'
         context['baskets'] = Basket.objects.filter(user=self.object)
         return context
-
-
-# @login_required
-# def profile(request):
-#     if request.method == 'POST':
-#         form = UserProfileForm(instance=request.user, data=request.POST, files=request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect(reverse('users:profile'))
-#         else:
-#             print(form.errors)
-#     else:
-#         form = UserProfileForm(instance=request.user)
-#
-#     context = {
-#         'title': 'Store - Профиль',
-#         'form': form,
-#         'baskets': Basket.objects.filter(user=request.user),
-#
-#     }
-#     return render(request, 'users/profile.html', context)
 
 
 def logout(request):
