@@ -3,7 +3,7 @@ from django.contrib import auth, messages
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 from django.urls import reverse, reverse_lazy
 from products.models import Basket
-from django.contrib.auth.decorators import login_required
+
 from django.views.generic.edit import CreateView, UpdateView
 from users.models import User
 
@@ -39,7 +39,7 @@ class UserRegistrationView(CreateView):
 class UserProfileView(UpdateView):
     model = User
     form_class = UserProfileForm
-    template_name = 'user/profile.html'
+    template_name = 'users/profile.html'
 
     def get_success_url(self):
         return reverse_lazy('users:profile', args=(self.object.id,))
