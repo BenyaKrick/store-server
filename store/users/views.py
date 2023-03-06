@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect
 from django.contrib import auth
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 from django.urls import reverse, reverse_lazy
